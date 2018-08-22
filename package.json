@@ -1,0 +1,19 @@
+{
+  "name": "scl-2018-01-fe-markdown",
+  "version": "0.0.1",
+  "description": "[Markdown](https://es.wikipedia.org/wiki/Markdown) es un lenguaje de marcado\r ligero muy popular entre developers. Es usado en muchísimas plataformas que\r manejan texto plano (GitHub, foros, blogs, ...), y es muy común\r encontrar varios archivos en ese formato en cualquier tipo de repositorio\r (empezando por el tradicional `README.md`).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scarleette/scl-2018-01-FE-markdown.git"
+  },
+  "author": "Scarlett Obreque Antoine",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/scarleette/scl-2018-01-FE-markdown/issues"
+  },
+  "homepage": "https://github.com/scarleette/scl-2018-01-FE-markdown#readme"
+}
