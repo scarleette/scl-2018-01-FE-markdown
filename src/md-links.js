@@ -1,4 +1,4 @@
-// prueba para realizar test con jest
+
 const path = require('path');
 const fs = require('fs');
 const marked = require('marked');
@@ -7,8 +7,7 @@ const marked = require('marked');
 function rutaAbsoluta(ruta) {
   const rutaCompleta = path.resolve(ruta);
   /* console.log(rutaCompleta);*/
-  leerRutacompleta(rutaCompleta);
-  comprueboExtencion(rutaCompleta); 
+  comprueboExtencion(rutaCompleta);
   return rutaCompleta;
 }
 
@@ -21,8 +20,9 @@ function leerRutacompleta(ruta2) {
 
 function comprueboExtencion(ruta3) {
   const extencionPermitida = '.md';
-  const extencion = (ruta3.substring(xyz.lastIndexOf('.'))).toLowerCase();
+  const extencion = (ruta3.substring(ruta3.lastIndexOf('.'))).toLowerCase();
   if (extencion === extencionPermitida) {
+    leerRutacompleta(ruta3);
     console.log('Esto si funciona, es .md');
   } else {
     console.log('error esto no es .md');
