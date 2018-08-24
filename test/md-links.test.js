@@ -1,13 +1,6 @@
-const funciones = require('../src/md-links');
+const rutaAbsoluta = require('../src/md-links');
 
-test('la suma de 1 + 2 es igual a 3', ()=> {
-  expect(funciones.suma(1, 2)).toBe(3);
-});
 
-test('la resta de 2 + 1 es igual a 1', ()=> {
-  expect(funciones.resta(2, 1)).toBe(1);
-});
-
-test('la extencion del archivo debe ser .md', ()=> {
-  expect(validaExtencion()).toBe();
+test('tiene que haber una ruta despues del comando', ()=> {
+  expect(rutaAbsoluta()).toBe();
 });
