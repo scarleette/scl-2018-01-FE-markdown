@@ -62,7 +62,7 @@ function markdownLinkExtractor(markdown) {
   Marked(markdown, {renderer: renderer});
   console.log(links);
   
-  // return links;
+  return links;
 };
 
 
