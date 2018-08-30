@@ -7,7 +7,7 @@ const fetch = require('node-fetch');
 
 function rutaAbsoluta(ruta) {
   const rutaCompleta = path.resolve(ruta);
-  console.log(rutaCompleta);
+  // console.log(rutaCompleta);
   comprueboExtencion(rutaCompleta);
   return rutaCompleta;
 }
@@ -20,13 +20,15 @@ function leerRutacompleta(ruta2) {
     // console.log(lineaArchivo);
     let extraeLinea = lineaArchivo.map(elemento => {
       // console.log(elemento);
-      const numeroLinea = (lineaArchivo.indexOf(elemento) + 1);
-      // console.log(numeroLinea);
-      return markdownLinkExtractor(data, elemento, numeroLinea);
+     const numeroLinea = (lineaArchivo.indexOf(elemento) + 1);
+      // console.log(elemento);
+      return markdownLinkExtractor(elemento, numeroLinea);
     })
-     extraeLinea = extraeLinea.filter(elemento => elemento.length !== 0);
+    // console.log(extraeLinea);
+     extraeLinea = extraeLinea.filter(e => e.lenght !== 0);
+     
      extraeLinea = extraeLinea.reduce((elemento, elementos) => elemento.concat(elementos));
-    //  console.log(extraeLinea);
+     console.log(extraeLinea);
   });
 }
 
@@ -35,14 +37,14 @@ function comprueboExtencion(ruta3) {
   const extencion = (ruta3.substring(ruta3.lastIndexOf('.'))).toLowerCase();
   if (extencion === extencionPermitida) {
     leerRutacompleta(ruta3); 
-    console.log('Esto si funciona, es .md');
+    // console.log('Esto si funciona, es .md');
   } else {
-    console.log('error esto no es .md');
+    // console.log('error esto no es .md');
   }
 }
 
 
-function markdownLinkExtractor(markdown, elemento, numeroLinea) {
+function markdownLinkExtractor(markdown, numeroLinea) {
   const links = [];
   const renderer = new Marked.Renderer();
 
@@ -57,8 +59,7 @@ function markdownLinkExtractor(markdown, elemento, numeroLinea) {
       href: href,
       text: text,
       title: title,
-      linea: numeroLinea,
-      ruta: elemento
+      linea: numeroLinea
     });
   };
 
@@ -69,15 +70,14 @@ function markdownLinkExtractor(markdown, elemento, numeroLinea) {
       href: href,
       text: text,
       title: title,
-      linea: numeroLinea,
-      ruta: elemento
+      linea: numeroLinea
     });
   };
 
   Marked(markdown, {renderer: renderer});
   // console.log(links);
   // validarLink(links);
-  // return links;
+  return links;
 };
 
 function validarLink(links) {
