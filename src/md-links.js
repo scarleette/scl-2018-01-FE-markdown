@@ -21,7 +21,7 @@ function leerRutacompleta(ruta2) {
     let extraeLinea = lineaArchivo.map(elemento => {
       // console.log(elemento);
       const numeroLinea = (lineaArchivo.indexOf(elemento) + 1);
-      console.log(numeroLinea);
+      // console.log(numeroLinea);
       return markdownLinkExtractor(data, elemento, numeroLinea);
     })
      extraeLinea = extraeLinea.filter(elemento => elemento.length !== 0);
