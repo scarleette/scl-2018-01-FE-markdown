@@ -8,14 +8,15 @@ const fetch = require('node-fetch');
 function rutaAbsoluta(ruta) {
   const rutaCompleta = path.resolve(ruta);
   // console.log(rutaCompleta);
-  // comprueboExtencion(rutaCompleta);
   return rutaCompleta;
 }
 
-function extraerLinea(ruta4){
-  fs.readFile(ruta4, 'utf-8', (err, data)=> {
-    if (err) throw err;
-    // console.log(data);
+
+function extraerLinea(ruta4) {
+  leerRutacompleta(ruta4).then((data)=> {
+    console.log(data);
+    return data;
+    }).then(data => {
     let lineaArchivo = data.split('\n');
     // console.log(lineaArchivo);
     let extraeLinea = lineaArchivo.map(elemento => {
@@ -23,24 +24,38 @@ function extraerLinea(ruta4){
     const numeroLinea = (lineaArchivo.indexOf(elemento) + 1);
     // console.log(elemento);
     // return markdownLinkExtractor(elemento, numeroLinea);
+
     });
-    // console.log(extraeLinea);
-     extraeLinea = extraeLinea.filter(e => e.lenght !== 0);
-     extraeLinea = extraeLinea.reduce((elemento, elementos) => elemento.concat(elementos));
-    //  console.log(extraeLinea);
   });
 };
+
+// function extraerLinea(ruta4){
+//   fs.readFile(ruta4, 'utf-8', (err, data)=> {
+//     if (err) throw err;
+//     // console.log(data);
+//     let lineaArchivo = data.split('\n');
+//     // console.log(lineaArchivo);
+//     let extraeLinea = lineaArchivo.map(elemento => {
+//     // console.log(elemento);
+//     const numeroLinea = (lineaArchivo.indexOf(elemento) + 1);
+//     // console.log(elemento);
+//     // return markdownLinkExtractor(elemento, numeroLinea);
+//     });
+//     // console.log(extraeLinea);
+//      extraeLinea = extraeLinea.filter(e => e.lenght !== 0);
+//      extraeLinea = extraeLinea.reduce((elemento, elementos) => elemento.concat(elementos));
+//     //  console.log(extraeLinea);
+//   });
+// };
 
 function leerRutacompleta(ruta2){
   return new Promise((resolve, reject)=> {
     fs.readFile(ruta2, 'utf-8', (err, data)=> {
-      if(err) reject(error);
+      if(err) reject(err);
       resolve(data);
     });
   })
-}
-
-
+};
 
 function comprueboExtencion(ruta3) {
   const extencionPermitida = '.md';
@@ -117,7 +132,9 @@ function mdLinks(path) {
       const convertidaEnRutaAbsoluta = rutaAbsoluta(path);
       // console.log(convertidaEnRutaAbsoluta); 
       leerRutacompleta(convertidaEnRutaAbsoluta).then((data) => {
-      // console.log(data); 
+      console.log(data);
+      }).then(data => {
+        console.log('holi');
       });     
     }
   })
@@ -148,3 +165,23 @@ module.exports = {
     //  console.log(extraeLinea);
   });
 } */
+
+
+// function extraerLinea(ruta4){
+//   fs.readFile(ruta4, 'utf-8', (err, data)=> {
+//     if (err) throw err;
+//     // console.log(data);
+//     let lineaArchivo = data.split('\n');
+//     // console.log(lineaArchivo);
+//     let extraeLinea = lineaArchivo.map(elemento => {
+//     // console.log(elemento);
+//     const numeroLinea = (lineaArchivo.indexOf(elemento) + 1);
+//     // console.log(elemento);
+//     // return markdownLinkExtractor(elemento, numeroLinea);
+//     });
+//     // console.log(extraeLinea);
+//      extraeLinea = extraeLinea.filter(e => e.lenght !== 0);
+//      extraeLinea = extraeLinea.reduce((elemento, elementos) => elemento.concat(elementos));
+//     //  console.log(extraeLinea);
+//   });
+// };
