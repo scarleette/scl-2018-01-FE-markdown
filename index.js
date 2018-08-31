@@ -3,5 +3,5 @@
 const funciones = require('./src/md-links');
 const [, , ...args] = process.argv;
 
-funciones.rutaAbsoluta(args[0]);
+funciones.mdLinks(args[0]);
 
