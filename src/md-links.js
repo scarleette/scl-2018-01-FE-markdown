@@ -13,40 +13,26 @@ function rutaAbsoluta(ruta) {
 
 
 function extraerLinea(ruta4) {
-  leerRutacompleta(ruta4).then((data)=> {
-    console.log(data);
-    return data;
-    }).then(data => {
+  return new Promise((resolve, reject)=> {
+    leerRutacompleta(ruta4).then((data)=> {
+    // console.log(data);
     let lineaArchivo = data.split('\n');
     // console.log(lineaArchivo);
     let extraeLinea = lineaArchivo.map(elemento => {
     // console.log(elemento);
     const numeroLinea = (lineaArchivo.indexOf(elemento) + 1);
     // console.log(elemento);
-    // return markdownLinkExtractor(elemento, numeroLinea);
-
-    });
+    return markdownLinkExtractor(ruta4, elemento, numeroLinea);
   });
+    extraeLinea = extraeLinea.filter(e => e.lenght !== 0);
+    // console.log(extraeLinea);
+    extraeLinea = extraeLinea.reduce((elemento, elementos) => elemento.concat(elementos));
+    console.log(extraeLinea);
+    resolve(extraeLinea);
+  });
+});
 };
 
-// function extraerLinea(ruta4){
-//   fs.readFile(ruta4, 'utf-8', (err, data)=> {
-//     if (err) throw err;
-//     // console.log(data);
-//     let lineaArchivo = data.split('\n');
-//     // console.log(lineaArchivo);
-//     let extraeLinea = lineaArchivo.map(elemento => {
-//     // console.log(elemento);
-//     const numeroLinea = (lineaArchivo.indexOf(elemento) + 1);
-//     // console.log(elemento);
-//     // return markdownLinkExtractor(elemento, numeroLinea);
-//     });
-//     // console.log(extraeLinea);
-//      extraeLinea = extraeLinea.filter(e => e.lenght !== 0);
-//      extraeLinea = extraeLinea.reduce((elemento, elementos) => elemento.concat(elementos));
-//     //  console.log(extraeLinea);
-//   });
-// };
 
 function leerRutacompleta(ruta2){
   return new Promise((resolve, reject)=> {
@@ -69,7 +55,7 @@ function comprueboExtencion(ruta3) {
   }
 };
 
-function markdownLinkExtractor(markdown, numeroLinea) {
+function markdownLinkExtractor(ruta4, markdown, numeroLinea) {
   const links = [];
   const renderer = new Marked.Renderer();
 
@@ -84,7 +70,8 @@ function markdownLinkExtractor(markdown, numeroLinea) {
       href: href,
       text: text,
       title: title,
-      linea: numeroLinea
+      linea: numeroLinea,
+      ruta: ruta4
     });
   };
 
@@ -95,7 +82,8 @@ function markdownLinkExtractor(markdown, numeroLinea) {
       href: href,
       text: text,
       title: title,
-      linea: numeroLinea
+      linea: numeroLinea,
+      ruta: ruta4
     });
   };
 
@@ -131,11 +119,9 @@ function mdLinks(path) {
     if (compruebaArchivoMd){
       const convertidaEnRutaAbsoluta = rutaAbsoluta(path);
       // console.log(convertidaEnRutaAbsoluta); 
-      leerRutacompleta(convertidaEnRutaAbsoluta).then((data) => {
-      console.log(data);
-      }).then(data => {
-        console.log('holi');
-      });     
+      extraerLinea(convertidaEnRutaAbsoluta).then((data) => {
+      // console.log(data);
+      });   
     }
   })
 };
@@ -145,43 +131,3 @@ function mdLinks(path) {
 module.exports = {
   mdLinks
 };
-
-
-/* function leerRutacompleta(ruta2) {
-  fs.readFile(ruta2, 'utf-8', (err, data)=> {
-    if (err) throw err;
-    // console.log(data);
-    let lineaArchivo = data.split('\n');
-    // console.log(lineaArchivo);
-    let extraeLinea = lineaArchivo.map(elemento => {
-    // console.log(elemento);
-    const numeroLinea = (lineaArchivo.indexOf(elemento) + 1);
-    // console.log(elemento);
-    return markdownLinkExtractor(elemento, numeroLinea);
-    })
-    // console.log(extraeLinea);
-     extraeLinea = extraeLinea.filter(e => e.lenght !== 0);
-     extraeLinea = extraeLinea.reduce((elemento, elementos) => elemento.concat(elementos));
-    //  console.log(extraeLinea);
-  });
-} */
-
-
-// function extraerLinea(ruta4){
-//   fs.readFile(ruta4, 'utf-8', (err, data)=> {
-//     if (err) throw err;
-//     // console.log(data);
-//     let lineaArchivo = data.split('\n');
-//     // console.log(lineaArchivo);
-//     let extraeLinea = lineaArchivo.map(elemento => {
-//     // console.log(elemento);
-//     const numeroLinea = (lineaArchivo.indexOf(elemento) + 1);
-//     // console.log(elemento);
-//     // return markdownLinkExtractor(elemento, numeroLinea);
-//     });
-//     // console.log(extraeLinea);
-//      extraeLinea = extraeLinea.filter(e => e.lenght !== 0);
-//      extraeLinea = extraeLinea.reduce((elemento, elementos) => elemento.concat(elementos));
-//     //  console.log(extraeLinea);
-//   });
-// };
