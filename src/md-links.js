@@ -9,8 +9,7 @@ function rutaAbsoluta(ruta) {
   const rutaCompleta = path.resolve(ruta);
   // console.log(rutaCompleta);
   return rutaCompleta;
-}
-
+};
 
 function extraerLinea(ruta4) {
   return new Promise((resolve, reject)=> {
@@ -27,7 +26,7 @@ function extraerLinea(ruta4) {
     extraeLinea = extraeLinea.filter(e => e.lenght !== 0);
     // console.log(extraeLinea);
     extraeLinea = extraeLinea.reduce((elemento, elementos) => elemento.concat(elementos));
-    console.log(extraeLinea);
+    // console.log(extraeLinea);
     resolve(extraeLinea);
   });
 });
@@ -38,7 +37,9 @@ function leerRutacompleta(ruta2){
   return new Promise((resolve, reject)=> {
     fs.readFile(ruta2, 'utf-8', (err, data)=> {
       if(err) reject(err);
+      // console.log(data);
       resolve(data);
+      
     });
   })
 };
@@ -93,26 +94,29 @@ function markdownLinkExtractor(ruta4, markdown, numeroLinea) {
   return links;
 };
 
-function validarLink(links) {
-  links.forEach(elemento => {
-    let url = elemento.href;
-    fetch(url).then(response => response
-    ).then(data => {
-      status = {
-        status: {
-          'url': data.url,
-          'status': data.status,
-          'statusText': data.statusText
-        }       
-      }
-      // console.log(status);
-    }).catch(error => {
-      console.error('ERROR > ' + error.status);
-    });
-  });
-};
 
-function mdLinks(path) {
+function validarLinks(links) {
+  new Promise((resolve, reject) => {
+    let status = [];
+    links.forEach(elemento => {
+      const url = elemento.href;
+      fetch(url).then(response => response
+      ).then(data => {
+        status.push = {
+          status: {
+            'url': data.url,
+            'status': data.status,
+            'statusText': data.statusText
+          }       
+        }
+        console.log(status);
+        resolve(status);
+      })
+    })
+  })
+}
+
+function mdLinks(path, options) {
   return new Promise((resolve, reject)=> {
     const compruebaArchivoMd = comprueboExtencion(path);
     // console.log(compruebaArchivoMd);
@@ -121,6 +125,9 @@ function mdLinks(path) {
       // console.log(convertidaEnRutaAbsoluta); 
       extraerLinea(convertidaEnRutaAbsoluta).then((data) => {
       // console.log(data);
+      validarLinks(data);
+      // console.log('holi');
+      // console.log(options);
       });   
     }
   })
