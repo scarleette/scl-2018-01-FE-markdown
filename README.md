@@ -14,3 +14,9 @@ Estos archivos son proporcionados por diferentes servicios en la red y se pueden
 md-links es una libreria que te permitira extraer los links que se encuentran en los archivos markdown de tus proyectos, revisar url , titulo y estado en el que se encuentran.
 
 ¿Como puedes implementarlo? 
+
+Debes instalarlo como dependencia con el comando  
+**npm i md-links0**
+
+[gogodance](https://www.google.cl)
+
